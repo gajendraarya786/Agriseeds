@@ -1,5 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import pic1 from  '../../src/assets/img1.jpg'
+import pic2 from  '../../src/assets/img2.jpg'
+import pic3 from  '../../src/assets/img3.jpg'
+import pic4 from  '../../src/assets/img4.jpg'
 
 
 const products = [
@@ -8,7 +11,7 @@ const products = [
       name: 'Earthen Bottle',
       href: '#',
       price: '$48',
-      imageSrc: '../../src/assets/img.jpg',
+      imageSrc: pic1,
       imageAlt: 'Tall slender porcelain bottle with natural clay textured body and cork stopper.',
     },
     {
@@ -16,7 +19,7 @@ const products = [
       name: 'Nomad Tumbler',
       href: '#',
       price: '$35',
-      imageSrc: pic1,
+      imageSrc: pic2,
       imageAlt: 'Olive drab green insulated bottle with flared screw lid and flat top.',
     },
     {
@@ -24,7 +27,7 @@ const products = [
       name: 'Focus Paper Refill',
       href: '#',
       price: '$89',
-      imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-03.jpg',
+      imageSrc: pic3,
       imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
     },
     {
@@ -32,7 +35,7 @@ const products = [
       name: 'Machined Mechanical Pencil',
       href: '#',
       price: '$35',
-      imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-04.jpg',
+      imageSrc: pic4,
       imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
     },
   ]
