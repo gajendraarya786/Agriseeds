@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-
+import pic1 from  '../../src/assets/img1.jpg'
 
 
 const products = [
@@ -16,7 +16,7 @@ const products = [
       name: 'Nomad Tumbler',
       href: '#',
       price: '$35',
-      imageSrc: '../../src/assets/img1.jpg',
+      imageSrc: pic1,
       imageAlt: 'Olive drab green insulated bottle with flared screw lid and flat top.',
     },
     {
