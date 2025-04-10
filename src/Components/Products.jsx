@@ -3,6 +3,11 @@ import pic1 from  '../../src/assets/img1.jpg'
 import pic2 from  '../../src/assets/img2.jpg'
 import pic3 from  '../../src/assets/img3.jpg'
 import pic4 from  '../../src/assets/img4.jpg'
+import pic5 from  '../../src/assets/img5.jpg'
+import pic6 from  '../../src/assets/img6.jpg'
+import pic7 from  '../../src/assets/img7.jpg'
+import pic8 from  '../../src/assets/img8.jpg'
+
 
 
 const products = [
@@ -72,7 +77,7 @@ const products = [
       id: 1,
       name: 'Basic Tee',
       href: '#',
-      imageSrc: '../../src/assets/img4.jpg',
+      imageSrc: pic5,
       imageAlt: "Front of men's Basic Tee in black.",
       price: '$35',
       color: 'Black',
@@ -81,7 +86,7 @@ const products = [
       id: 2,
       name: 'Basic Tee',
       href: '#',
-      imageSrc: '../../src/assets/img5.jpg',
+      imageSrc: pic6,
       imageAlt: "Front of men's Basic Tee in black.",
       price: '$35',
       color: 'Black',
@@ -90,7 +95,7 @@ const products = [
       id: 3,
       name: 'Basic Tee',
       href: '#',
-      imageSrc: '../../src/assets/img6.jpg',
+      imageSrc: pic7,
       imageAlt: "Front of men's Basic Tee in black.",
       price: '$35',
       color: 'Black',
@@ -99,7 +104,7 @@ const products = [
       id: 4,
       name: 'Basic Tee',
       href: '#',
-      imageSrc: '../../src/assets/img7.jpg',
+      imageSrc: pic8,
       imageAlt: "Front of men's Basic Tee in black.",
       price: '$35',
       color: 'Black',
