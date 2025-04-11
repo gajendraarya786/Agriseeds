@@ -124,7 +124,7 @@ const products = [
                 <img
                   alt={product.imageAlt}
                   src={product.imageSrc}
-                  className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto h-122"
+                  className="aspect-square w-full lg:h-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-7/8 h-122"
                   onClick={() => navigate(`/product/${product.id}`)}
                 />
                 <div className="mt-4 flex justify-between">
