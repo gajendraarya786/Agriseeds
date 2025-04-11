@@ -6,6 +6,8 @@ import Contact from './Pages/Contact';
 import Home from './Pages/Home';
 import ProductPage from './Pages/ProductPage';
 import { Routes, Route } from 'react-router-dom';
+import CheckoutPage from './Pages/CheckoutPage';
+import SuccessPage from './Pages/SuccessPage';
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/products' element={<ProductPage />} />
         <Route path='/contact' element={<Contact />} />
+        <Route path='/checkout' element={<CheckoutPage/>}/>
+        <Route path='/success' element={<SuccessPage/>}/>
       </Routes>
 
       <ToastContainer 
