@@ -16,7 +16,6 @@ function App() {
         <Route path='/contact' element={<Contact />} />
       </Routes>
 
-      {/* Toast Container to show popups */}
       <ToastContainer 
         position="top-right" 
         autoClose={3000} 
