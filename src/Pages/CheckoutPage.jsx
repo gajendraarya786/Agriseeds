@@ -233,6 +233,7 @@ export default function CheckoutPage() {
       total: `₹${subtotal}`,
       payment_method: paymentMethod,
       items: orderDetails,
+      to_email: customerEmail, // 🔥 important!
     };
 
     try {
