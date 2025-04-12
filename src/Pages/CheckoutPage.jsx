@@ -235,6 +235,10 @@ export default function CheckoutPage() {
       items: orderDetails,
       to_email: customerEmail, // 🔥 important!
     };
+    
+    console.log("Sending customer email to:", customerEmail);
+    console.log("Email parameters:", templateParams);
+
 
     try {
       // Admin Email
