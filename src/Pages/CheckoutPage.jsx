@@ -235,13 +235,13 @@ export default function CheckoutPage() {
     };
 
     try {
-      // Send email to Admin
+      // 1. Send email to Admin
       const adminTemplateParams = {
         ...templateParams,
         email: "gajendra.work538@gmail.com", // Admin's email address (replace with actual admin email)
       };
-      
-      // Send email to Customer
+
+      // 2. Send email to Customer
       const customerTemplateParams = {
         ...templateParams,
         email: user?.emailAddresses?.[0]?.emailAddress || "N/A", // Customer's email address
@@ -250,7 +250,7 @@ export default function CheckoutPage() {
       // Send email to Admin
       await emailjs.send(
         'service_sbq9aid',
-        'template_35t4dmn', // Your admin template ID
+        'template_35t4dmn', // Admin template ID
         adminTemplateParams,
         'YlFF86mvKXrNe3yRI'
       );
@@ -258,7 +258,7 @@ export default function CheckoutPage() {
       // Send email to Customer
       await emailjs.send(
         'service_sbq9aid',
-        'template_v1mamgk', // Your customer template ID
+        'template_v1mamgk', // Customer template ID
         customerTemplateParams,
         'YlFF86mvKXrNe3yRI'
       );
