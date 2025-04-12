@@ -211,22 +211,23 @@ export default function CheckoutPage() {
 
   const handleOrder = async () => {
     if (!name.trim() || !phone.trim()) {
-      return alert("Please enter your name and phone number.");
+      return alert('Please enter your name and phone number.');
     }
     if (!paymentMethod) {
-      return alert("Please select a payment method.");
+      return alert('Please select a payment method.');
     }
     if (!user) {
-      return alert("You must be logged in to place an order.");
+      return alert('You must be logged in to place an order.');
     }
 
     setLoading(true);
 
     const orderDetails = cartItems.map(item => `${item.name} x ${item.quantity} - ${item.price}`).join(', ');
+    const customerEmail = user?.emailAddresses?.[0]?.emailAddress || 'N/A';
 
     const templateParams = {
       name,
-      email: user?.emailAddresses?.[0]?.emailAddress || "N/A", // Customer email
+      email: customerEmail,
       phone,
       order_id: orderId,
       total: `₹${subtotal}`,
@@ -235,38 +236,26 @@ export default function CheckoutPage() {
     };
 
     try {
-      // 1. Send email to Admin
-      const adminTemplateParams = {
-        ...templateParams,
-        email: "gajendra.work538@gmail.com", // Admin's email address (replace with actual admin email)
-      };
-
-      // 2. Send email to Customer
-      const customerTemplateParams = {
-        ...templateParams,
-        email: user?.emailAddresses?.[0]?.emailAddress || "N/A", // Customer's email address
-      };
-
-      // Send email to Admin
+      // Admin Email
       await emailjs.send(
         'service_sbq9aid',
-        'template_35t4dmn', // Admin template ID
-        adminTemplateParams,
+        'template_35t4dmn',
+        { ...templateParams, to_email: 'gajendra.work538@gmail.com' },
         'YlFF86mvKXrNe3yRI'
       );
 
-      // Send email to Customer
+      // Customer Email
       await emailjs.send(
         'service_sbq9aid',
-        'template_v1mamgk', // Customer template ID
-        customerTemplateParams,
+        'template_v1mamgk',
+        { ...templateParams, to_email: customerEmail },
         'YlFF86mvKXrNe3yRI'
       );
 
-      navigate("/success");
+      navigate('/success');
     } catch (error) {
-      console.error("EmailJS Error:", error);
-      alert("Something went wrong. Please try again.");
+      console.error('EmailJS Error:', error);
+      alert('Something went wrong. Please try again.');
     } finally {
       setLoading(false);
     }
