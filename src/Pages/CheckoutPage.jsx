@@ -226,7 +226,7 @@ export default function CheckoutPage() {
 
     const templateParams = {
       name,
-      email: user?.emailAddresses?.[0]?.emailAddress || "N/A",
+      email: user?.emailAddresses?.[0]?.emailAddress || "N/A", // Customer email
       phone,
       order_id: orderId,
       total: `₹${subtotal}`,
@@ -236,10 +236,22 @@ export default function CheckoutPage() {
 
     try {
       // Send email to Admin
+      const adminTemplateParams = {
+        ...templateParams,
+        email: "gajendra.work538@gmail.com", // Admin's email address (replace with actual admin email)
+      };
+      
+      // Send email to Customer
+      const customerTemplateParams = {
+        ...templateParams,
+        email: user?.emailAddresses?.[0]?.emailAddress || "N/A", // Customer's email address
+      };
+
+      // Send email to Admin
       await emailjs.send(
         'service_sbq9aid',
         'template_35t4dmn', // Your admin template ID
-        templateParams,
+        adminTemplateParams,
         'YlFF86mvKXrNe3yRI'
       );
 
@@ -247,7 +259,7 @@ export default function CheckoutPage() {
       await emailjs.send(
         'service_sbq9aid',
         'template_v1mamgk', // Your customer template ID
-        templateParams,
+        customerTemplateParams,
         'YlFF86mvKXrNe3yRI'
       );
 
