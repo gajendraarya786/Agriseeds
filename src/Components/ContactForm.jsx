@@ -33,7 +33,7 @@ const ContactForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col items-center text-sm mt-20"
+      className="flex flex-col items-center text-sm mt-20 mb-20"
     >
       <p className="text-lg text-green-600 font-medium pb-2">Contact Us</p>
       <h1 className="text-4xl font-semibold text-slate-700 pb-4">Get in touch with us</h1>
