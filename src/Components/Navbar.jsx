@@ -1,30 +1,38 @@
 import React from 'react';
 import logo from '../../src/assets/logo.png';
-import { NavLink } from 'react-router-dom';
-import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
-import { useSelector } from 'react-redux';
-
+import { NavLink, useNavigate } from 'react-router-dom';
+import useCartStore from '../store/cartStore';
+import { useAuthStore } from '../store/authStore';
 const Navbar = ({ setIsCartOpen }) => {
   const [open, setOpen] = React.useState(false);
-
-
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  const cartItems = useCartStore(state => state.cartItems);
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+
+  const { user, isAuthenticated, logout } = useAuthStore();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    const result = await logout();
+    if (result.success) {
+      navigate('/');
+      setOpen(false);
+    } else {
+      console.error(result.error);
+    }
+  };
 
   return (
     <nav className="sticky top-0 z-60 flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">
-      
       <NavLink to='/'>
         <img className="h-9" src={logo} alt="dummyLogoColored" />
       </NavLink>
 
-     
       <div className="hidden sm:flex items-center gap-8">
         <NavLink to='/'>Home</NavLink>
         <NavLink to='/products'>All Products</NavLink>
         <NavLink to='/contact'>Contact</NavLink>
 
-      
+        {/* Search Bar */}
         <div className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
           <input
             className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500"
@@ -37,7 +45,7 @@ const Navbar = ({ setIsCartOpen }) => {
           </svg>
         </div>
 
-     
+        {/* Cart Icon */}
         <div className="relative cursor-pointer" onClick={() => setIsCartOpen(true)}>
           <svg width="18" height="18" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M.583.583h2.333l1.564 7.81a1.17 1.17 0 0 0 1.166.94h5.67a1.17 1.17 0 0 0 1.167-.94l.933-4.893H3.5m2.333 8.75a.583.583 0 1 1-1.167 0 .583.583 0 0 1 1.167 0m6.417 0a.583.583 0 1 1-1.167 0 .583.583 0 0 1 1.167 0" stroke="#615fff" strokeLinecap="round" strokeLinejoin="round" />
@@ -49,18 +57,28 @@ const Navbar = ({ setIsCartOpen }) => {
           )}
         </div>
 
-     
-        <header className="flex justify-end p-4 gap-4 cursor-pointer px-8 py-2 bg-green-500 hover:bg-green-600 transition text-white rounded-full">
-          <SignedOut>
-            <SignInButton mode="modal" className="cursor-pointer" />
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-        </header>
+        {/* Auth Buttons */}
+        {isAuthenticated ? (
+          <div className="flex items-center gap-4">
+            <span className="text-sm font-medium">Hi, {user.fullname}</span>
+            <button
+              onClick={handleLogout}
+              className="cursor-pointer px-6 py-2 bg-red-500 hover:bg-red-600 transition text-white rounded-full"
+            >
+              Logout
+            </button>
+          </div>
+        ) : (
+          <NavLink
+            to="/login"
+            className="cursor-pointer px-6 py-2 bg-green-500 hover:bg-green-600 transition text-white rounded-full"
+          >
+            Login
+          </NavLink>
+        )}
       </div>
 
-     
+      {/* Mobile Menu Button */}
       <button onClick={() => setOpen(!open)} aria-label="Menu" className="sm:hidden">
         <svg width="21" height="15" viewBox="0 0 21 15" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect width="21" height="1.5" rx=".75" fill="#426287" />
@@ -69,13 +87,12 @@ const Navbar = ({ setIsCartOpen }) => {
         </svg>
       </button>
 
-    
+      {/* Mobile Menu */}
       <div className={`${open ? 'flex' : 'hidden'} absolute top-[60px] left-0 w-full bg-white shadow-md py-4 flex-col items-start gap-4 px-5 text-sm md:hidden z-50`}>
         <NavLink to='/' onClick={() => setOpen(false)}>Home</NavLink>
         <NavLink to='/products' onClick={() => setOpen(false)}>All Products</NavLink>
         <NavLink to='/contact' onClick={() => setOpen(false)}>Contact</NavLink>
 
-      
         <div className="relative cursor-pointer" onClick={() => {
           setIsCartOpen(true);
           setOpen(false);
@@ -90,15 +107,26 @@ const Navbar = ({ setIsCartOpen }) => {
           )}
         </div>
 
-       
-        <header className="flex justify-end gap-4 cursor-pointer px-8 py-2 bg-green-500 hover:bg-green-600 transition text-white rounded-full mt-2">
-          <SignedOut>
-            <SignInButton mode="modal" />
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-        </header>
+        {/* Mobile Auth Buttons */}
+        {isAuthenticated ? (
+          <div className="flex flex-col w-full gap-2">
+            <span className="text-sm font-medium px-2">Hi, {user.fullname}</span>
+            <button
+              onClick={handleLogout}
+              className="cursor-pointer px-6 py-2 mt-1 bg-red-500 hover:bg-red-600 transition text-white rounded-full text-sm w-full"
+            >
+              Logout
+            </button>
+          </div>
+        ) : (
+          <NavLink
+            to="/login"
+            className="cursor-pointer px-6 py-2 mt-1 bg-indigo-500 hover:bg-indigo-600 transition text-white rounded-full text-sm w-full text-center"
+            onClick={() => setOpen(false)}
+          >
+            Login
+          </NavLink>
+        )}
       </div>
     </nav>
   );

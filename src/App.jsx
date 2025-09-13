@@ -8,6 +8,9 @@ import ProductPage from './Pages/ProductPage';
 import { Routes, Route } from 'react-router-dom';
 import CheckoutPage from './Pages/CheckoutPage';
 import SuccessPage from './Pages/SuccessPage';
+import Login from './Pages/Login';
+import Signup from './Pages/Signup';
+import OrderHistory from './Pages/OrderHistory';
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
         <Route path='/contact' element={<Contact />} />
         <Route path='/checkout' element={<CheckoutPage/>}/>
         <Route path='/success' element={<SuccessPage/>}/>
+        <Route path='/signup' element={<Signup/>}/>
+        <Route path='/login' element={<Login />} />
+        <Route path='/orders' element={<OrderHistory />} />
       </Routes>
 
       <ToastContainer 
